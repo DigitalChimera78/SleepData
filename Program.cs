@@ -46,6 +46,7 @@ namespace SleepData
                     Console.WriteLine($"{dataDate:M/d/yy},{string.Join("|", hours)}");
                     // add 1 week to date
                     dataDate = dataDate.AddDays(7);
+                }
             }
             else if (resp == "2")
             {
