@@ -77,7 +77,22 @@ namespace SleepData
             }
             else if (resp == "2")
             {
-                
+                StreamReader sr = new StreamReader("data.txt");
+                while (!sr.EndOfStream)
+                {
+                    string[] line = sr.ReadLine().Split(',');
+                    DateTime date = DateTime.Parse(line[0]);
+                    string[] hours = line[1].Split('|');
+                    
+                    Console.WriteLine(date);
+
+                    for (int i = 0; i < hours.Length - 1; i++)
+                    {
+                        Console.WriteLine(hours[i]);
+                    }
+                }
+
+                sr.Close();
             }
 
             logger.Info("Program ended");
