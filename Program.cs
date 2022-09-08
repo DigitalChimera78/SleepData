@@ -84,12 +84,7 @@ namespace SleepData
                     DateTime date = DateTime.Parse(line[0]);
                     string[] hours = line[1].Split('|');
                     
-                    Console.WriteLine(date);
-
-                    for (int i = 0; i < hours.Length - 1; i++)
-                    {
-                        Console.WriteLine(hours[i]);
-                    }
+                    Console.WriteLine($"Week of {date:MMM} {date:dd}, {date:yyyy}");
                 }
 
                 sr.Close();
