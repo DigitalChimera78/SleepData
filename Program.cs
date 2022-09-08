@@ -85,6 +85,9 @@ namespace SleepData
                     string[] hours = line[1].Split('|');
                     
                     Console.WriteLine($"Week of {date:MMM} {date:dd}, {date:yyyy}");
+                    Console.WriteLine(" Mon Tue Wed Thu Fri Sat Sun Tot Avg");
+                    Console.WriteLine(" --- --- --- --- --- --- --- --- ---");
+                    
                 }
 
                 sr.Close();
