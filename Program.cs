@@ -82,12 +82,63 @@ namespace SleepData
                 {
                     string[] line = sr.ReadLine().Split(',');
                     DateTime date = DateTime.Parse(line[0]);
-                    string[] hours = line[1].Split('|');
+                    string[] hoursString = line[1].Split('|');
+                    int[] hours = new int[hoursString.Length];
+                    int tot = 0;
+                    double avg;
+
+                    for (int i = 0; i < hoursString.Length; i++)
+                    {
+                        hours[i] = Int32.Parse(hoursString[i]);
+                        tot += hours[i];
+                    }
+
+                    avg = Convert.ToDouble(tot) / hours.Length;
                     
                     Console.WriteLine($"Week of {date:MMM} {date:dd}, {date:yyyy}");
-                    Console.WriteLine(" Mon Tue Wed Thu Fri Sat Sun Tot Avg");
-                    Console.WriteLine(" --- --- --- --- --- --- --- --- ---");
-                    
+                    Console.WriteLine(" Mo Tu We Th Fr Sa Su Tot Avg");
+                    Console.WriteLine(" -- -- -- -- -- -- -- --- ---");
+
+                    for (int i = 0; i < hours.Length; i++)
+                    {
+                        if(hoursString[i].Length == 1)
+                        {
+                            Console.Write($"  {hours[i]}");
+                        }
+                        else if(hoursString[i].Length == 2)
+                        {
+                            Console.Write($" {hours[i]}");
+                        }
+                    }
+
+                    string totString = tot.ToString();
+                    string avgString = avg.ToString("f1");
+
+                    if (totString.Length == 1)
+                    {
+                        Console.Write($"   {totString}");
+                    }
+                    else if (totString.Length == 2)
+                    {
+                        Console.Write($"  {totString}");
+                    }
+                    else if (totString.Length == 3)
+                    {
+                        Console.Write($" {totString}");
+                    }
+
+                    if (avgString.Length == 1)
+                    {
+                        Console.WriteLine($"   {avgString}");
+                    }
+                    else if (avgString.Length == 2)
+                    {
+                        Console.WriteLine($"  {avgString}");
+                    }
+                    else if (avgString.Length == 3)
+                    {
+                        Console.WriteLine($" {avgString}");
+                    }
                 }
 
                 sr.Close();
