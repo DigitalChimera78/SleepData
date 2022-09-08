@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using NLog.Web;
 
 namespace SleepData
 {
@@ -7,6 +8,12 @@ namespace SleepData
     {
         static void Main(string[] args)
         {
+            string path = Directory.GetCurrentDirectory() + "\\nlog.config";
+
+            // create instance of Logger
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog(path).GetCurrentClassLogger();
+            logger.Info("Program started");
+
             // ask for input
             Console.WriteLine("Enter 1 to create data file.");
             Console.WriteLine("Enter 2 to parse data.");
@@ -16,12 +23,26 @@ namespace SleepData
 
             if (resp == "1")
             {
-                 // create data file
+                // create data file
 
-                 // ask a question
-                Console.WriteLine("How many weeks of data is needed?");
+                // ask a question
                 // input the response (convert to int)
-                int weeks = int.Parse(Console.ReadLine());
+
+                bool isValid = false;
+                int weeks = 0;
+                while (!isValid)
+                {
+                    Console.WriteLine("How many weeks of data is needed?");
+
+                    if (int.TryParse(Console.ReadLine(), out weeks))
+                    {
+                        isValid = true;
+                    }
+                    else
+                    {
+                        logger.Error("Invalid input");
+                    }
+                }
 
                 // determine start and end date
                 DateTime today = DateTime.Now;
@@ -56,9 +77,10 @@ namespace SleepData
             }
             else if (resp == "2")
             {
-                // TODO: parse data file
-
+                
             }
+
+            logger.Info("Program ended");
         }
     }
 }
